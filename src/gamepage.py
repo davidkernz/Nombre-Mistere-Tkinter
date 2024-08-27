@@ -36,13 +36,13 @@ class GamePage(tk.Frame):
         self.info_label = tk.Label(stack_layout, text=f"Il vous reste {self.counter} essais.")
         self.info_label.pack()
 
-        self.number_entry = tk.Entry(stack_layout, font=("Arial", 30), justify="center", width=5)
-        self.number_entry.pack(pady=30)
+        self.user_input = tk.Entry(stack_layout, font=("Arial", 30), justify="center", width=5)
+        self.user_input.pack(pady=30)
 
         self.placeholder_text = "?"
-        self.number_entry.insert(0, self.placeholder_text)
-        self.number_entry.bind("<FocusIn>", self.on_entry_focus)
-        self.number_entry.bind("<FocusOut>", self.on_entry_focus_out)
+        self.user_input.insert(0, self.placeholder_text)
+        self.user_input.bind("<FocusIn>", self.on_entry_focus)
+        self.user_input.bind("<FocusOut>", self.on_entry_focus_out)
 
         self.guess_button = tk.Button(stack_layout, text="DEVINER", command=self.button_clicked, bg="grey", fg="white", width=15)
         self.guess_button.pack(pady=10)
@@ -51,17 +51,17 @@ class GamePage(tk.Frame):
         self.result_label.pack()
 
     def on_entry_focus(self, event):
-        if self.number_entry.get() == self.placeholder_text:
-            self.number_entry.delete(0, tk.END)
-            self.number_entry.config(fg='black')
+        if self.user_input.get() == self.placeholder_text:
+            self.user_input.delete(0, tk.END)
+            self.user_input.config(fg='black')
 
     def on_entry_focus_out(self, event):
-        if not self.number_entry.get():
-            self.number_entry.insert(0, self.placeholder_text)
-            self.number_entry.config(fg='grey')
+        if not self.user_input.get():
+            self.user_input.insert(0, self.placeholder_text)
+            self.user_input.config(fg='grey')
 
     def button_clicked(self):
-        user_input = self.number_entry.get()
+        user_input = self.user_input.get()
 
         if not user_input.isdigit():
             self.result_label.config(text="Veuillez entrer un nombre valide", fg="red")
